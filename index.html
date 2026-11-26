@@ -41,9 +41,12 @@
   <!-- Google AdSense Verification & Auto Ads -->
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5793307297750318" crossorigin="anonymous"></script>
   <title>भूगोल एटलस — विश्व, भारत एवं राजस्थान का संपूर्ण इंटरैक्टिव मानचित्र</title>
+  <link rel="preconnect" href="https://cdn.tailwindcss.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com" />
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
   <style>
     body {
       font-family: "Noto Sans Devanagari", "Inter", system-ui, -apple-system, sans-serif;
@@ -285,6 +288,7 @@
   <div id="appToast" class="hidden fixed bottom-5 right-5 z-50 bg-slate-900 text-white text-xs sm:text-sm font-medium px-4 py-2.5 rounded-xl shadow-lg border border-slate-700"></div>
 
   <script>
+    window.addEventListener('DOMContentLoaded', () => {
     // =========================================================================
     // 1. WORLD GEOGRAPHY DATASETS
     // =========================================================================
@@ -1458,7 +1462,8 @@
       }
     });
 
-    window.addEventListener('DOMContentLoaded', () => switchTab('world'));
+    switchTab('world');
+    });
   </script>
 </body>
 </html>
