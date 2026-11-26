@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://shankerb0003-debug.github.io/sitemap.xml
