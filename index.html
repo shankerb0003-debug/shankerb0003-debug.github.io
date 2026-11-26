@@ -1454,11 +1454,34 @@
       const b = e.target.closest('.legal-tab-btn');
       if (b) renderLegalTab(b.dataset.legalPanel);
     });
-    document.getElementById('legalModalBody').addEventListener('submit', e => {
+    document.getElementById('legalModalBody').addEventListener('submit', async e => {
       if (e.target.id === 'contactForm') {
         e.preventDefault();
-        e.target.reset();
-        showToast('आपका संदेश प्राप्त हो गया है। धन्यवाद!');
+        const form = e.target;
+        const btn = form.querySelector('button[type="submit"]');
+        const name = (document.getElementById('contactName').value || '').trim();
+        const contact = (document.getElementById('contactEmail').value || '').trim();
+        const message = (document.getElementById('contactMsg').value || '').trim();
+        if (btn) { btn.disabled = true; btn.textContent = 'भेजा जा रहा है...'; }
+        try {
+          const res = await fetch('https://formsubmit.co/ajax/pawanrawat8505@gmail.com', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+              name,
+              contact,
+              message,
+              _subject: 'Bhoogol Atlas — नया संपर्क संदेश'
+            })
+          });
+          if (!res.ok) throw new Error('HTTP ' + res.status);
+          form.reset();
+          showToast('आपका संदेश सफलतापूर्वक भेज दिया गया है। धन्यवाद!');
+        } catch (err) {
+          showToast('संदेश भेजने में समस्या आई। कृपया सीधे ईमेल से संपर्क करें।');
+        } finally {
+          if (btn) { btn.disabled = false; btn.textContent = 'संदेश भेजें'; }
+        }
       }
     });
 
